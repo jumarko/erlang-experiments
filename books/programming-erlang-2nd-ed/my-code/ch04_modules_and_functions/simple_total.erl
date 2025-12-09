@@ -3,7 +3,7 @@
 %% Copy selectively whatever you want and paste it into the shell.
 %% Or you can run the specific functions, such as `simple_total:test().`
 -module(simple_total).
--export([total/1, test/0, test_funs/0]).
+-export([total/1, test/0, cost/1]).
 
 %% 4.2 Back to Shopping (Lists)
 test() ->
@@ -25,3 +25,7 @@ cost(milk) -> 7.
 total([{What, N}|T]) -> (cost(What) * N) + total(T);
 total([]) -> 0.
 
+
+%% Try it
+%%     ShoppingList = [{oranges, 4}, {newspaper, 1}, {apples, 10}, {pears, 6}, {milk, 3}].
+%%     list:total(ShoppingList).
