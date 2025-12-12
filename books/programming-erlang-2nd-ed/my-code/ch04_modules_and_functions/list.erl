@@ -2,7 +2,7 @@
 %% In this module we add simple functions `sum` and `map`
 %% and use them to implement a simplified version of the `total` function.
 -module(list).
--export([sum/1, map/2, total/1, doubles/1, double_items/1, map2/2, qsort/1, pythag/1, perms/1]).
+-export([sum/1, map/2, total/1, doubles/1, double_items/1, map2/2, qsort/1, pythag/1, perms/1, pythag2/1]).
 -import(simple_total, [cost/1]).
 
 sum([]) -> 0;
@@ -32,9 +32,9 @@ map2(F, L) -> [F(X) || X <- L].
 %% Quite readable and short!
 qsort([]) -> [];
 qsort([Pivot|T]) -> 
-    (qsort([X || X <- T, X < Pivot]))
+    qsort([X || X <- T, X < Pivot])
         ++ [Pivot] ++
-        (qsort([X || X <- T, X >= Pivot])).
+        qsort([X || X <- T, X >= Pivot]).
 
 
 %% Pythagorean triples
@@ -50,3 +50,13 @@ pythag(N) ->
 %% Look how succinct it is!
 perms([]) -> [[]]; % notice that it's an empty list inside a list of 1-elem (this is critical for the implementation to work, otherwise it always returns [])
 perms(L) -> [[H|T] || H <- L, T <- perms(L--[H])].
+
+
+pythag2(N) ->
+    [ {A,B,C} || 
+        A <- lists:seq(1,N),
+        B <- lists:seq(1,N),
+        C <- lists:seq(1,N),
+        A + B + C < N,
+        A*A + B*B =:= C*C
+    ].
